@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Philosophy Basics Mindmap</title>
+<style>
+:root{--bg:#f5f6f8;--ink:#1c2230;--mute:#596375;--line:#d3d8e0;--l:42%;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root{--bg:#12151c;--ink:#e8ebf1;--mute:#9aa4b5;--line:#2d3443;--l:68%}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 18px 56px}
+h1{font:600 2.2rem/1.1 "Iowan Old Style",Palatino,Georgia,serif;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--mute);margin:0 0 18px}
+.bar{display:flex;gap:8px;margin-bottom:22px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding:8px 0;z-index:2}
+button{font:inherit;font-size:.9rem;color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--ink)}
+button:focus-visible,summary:focus-visible{outline:2px solid hsl(var(--h,220) 60% var(--l));outline-offset:2px}
+details,.leaf{margin:2px 0}
+summary{list-style:none;cursor:pointer;display:flex;gap:10px;align-items:flex-start;padding:5px 0}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";flex:none;width:20px;height:20px;margin-top:2px;border-radius:50%;border:1.5px solid var(--c);color:var(--c);font:600 14px/17px system-ui;text-align:center}
+details[open]>summary::before{content:"\2212";background:var(--c);color:var(--bg)}
+.leaf{padding:5px 0 5px 30px}
+.n{font-family:"Iowan Old Style",Palatino,Georgia,serif;font-weight:600;font-size:1.05rem}
+.top>details>summary .n,.top>.leaf .n{font-size:1.3rem}
+.d{color:var(--mute);font-size:.93rem}
+.x{font-size:.9rem;font-style:italic;color:var(--ink);opacity:.85}
+.kids{margin-left:9px;padding-left:20px;border-left:2px solid var(--c)}
+.top{--c:hsl(var(--h) 55% var(--l));margin-bottom:10px;padding-bottom:6px}
+@media (prefers-reduced-motion:no-preference){details[open]>.kids{animation:o .18s ease-out}@keyframes o{from{opacity:0;transform:translateY(-4px)}}}
+</style>
+</head>
+<body>
+<main>
+<h1>Philosophy Basics</h1>
+<p class="sub">Tap a branch to open it. Each node has a short description and examples.</p>
+<div class="bar"><button id="ea">Expand all</button><button id="ca">Collapse all</button></div>
+<div id="tree"></div>
+</main>
+<script>
+// Format: [name, description, examples, children]
+var D=[
+["Metaphysics","Nature of reality, space, time, free will and God","",[
+ ["Ontology","Study of being and what categories of things exist","Plato's Forms, Aristotle's categories. Also used in computer science, e.g. knowledge graphs"],
+ ["Cosmology and Cosmogony","Nature, structure and origin of the universe","",[
+  ["Cosmology","Empirical study using telescopes and the Big Bang model","Cosmic microwave background, Hubble's expansion"],
+  ["Cosmogony","Origin and initial conditions of the universe","Quantum fluctuation models, Genesis, Norse myth"]]],
+ ["Mind and Matter","How conscious minds relate to the physical world","",[
+  ["Dualism","Mind and body are two different substances","Descartes, 17th century"],
+  ["Physicalism or Materialism","Everything, including the mind, is physical","Identity theory"],
+  ["Idealism","Reality is mental; the physical world is perception","Berkeley"]]],
+ ["Space and Time","Absolute, relational, or constructs of perception","Newton vs Leibniz, Kant"],
+ ["Identity and Change","What keeps something the same through change","Ship of Theseus, Heraclitus' river"],
+ ["Free Will and Determinism","Whether choices are free or fixed by causes","Hard determinism, compatibilism"]]],
+["Epistemology","Nature, origin and limits of knowledge","",[
+ ["Justified True Belief","Knowledge is belief that is true and justified","Gettier problem"],
+ ["Empiricism","Knowledge comes mainly from sensory experience","Locke, Hume"],
+ ["Rationalism","Knowledge comes from reason and innate ideas","Descartes, Leibniz, Spinoza"],
+ ["Kantian Synthesis","Both experience and reason are needed","Critique of Pure Reason"],
+ ["Skepticism","Questions whether certain knowledge is possible","Pyrrho, the evil demon, brain in a vat"]]],
+["Ethics","Right and wrong conduct, duties, how to live","",[
+ ["Metaethics","Where moral values come from and what 'good' means","Moral realism, relativism, emotivism"],
+ ["Normative Ethics","Standards and rules for how people should act","",[
+  ["Consequentialism","Right is whatever gives the best outcomes","Bentham, Mill"],
+  ["Deontology","Right is following duties and rules","Kant's categorical imperative"],
+  ["Virtue Ethics","Right is acting from good character","Aristotle"]]],
+ ["Applied Ethics","Moral theories applied to real controversies","Abortion, animal rights, business ethics, war, AI"]]],
+["Logic","Rules of correct reasoning","",[
+ ["Arguments","Premises (support) plus a conclusion","All men are mortal; Socrates is a man; so Socrates is mortal"],
+ ["Validity","If the premises are true, the conclusion must be true"],
+ ["Soundness","A valid argument whose premises are actually true"],
+ ["Inference","Deriving a conclusion from premises","",[
+  ["Deductive","Guarantees the conclusion","Syllogism"],
+  ["Inductive","Makes the conclusion probable","The sun rose daily, so it will rise tomorrow"],
+  ["Abductive","Infers the best explanation","Medical diagnosis"]]],
+ ["Topic-Neutrality","Applies to any subject, from math to daily life"],
+ ["Fallacies","Common reasoning errors","Ad hominem, straw man, slippery slope"]]],
+["Aesthetics","Art, beauty and value judgments","",[
+ ["Nature of Beauty","What makes something pleasing or profound","A sunset"],
+ ["Aesthetic Judgments","Is 'that is beautiful' objective or subjective?","Hume, Kant"],
+ ["Philosophy of Art","What counts as art and how it moves us","Duchamp's Fountain"],
+ ["The Sublime and Ugliness","Awe-inspiring or unsettling experiences","Burke on storms and mountains"]]],
+["Political Philosophy","Justice, power, rights and the state","",[
+ ["Social Contract","Authority rests on agreement","Hobbes, Locke, Rousseau"],
+ ["Theories of Justice","What a fair society looks like","Rawls' veil of ignorance, Nozick"],
+ ["Ideologies","Systems of political ideas","Liberalism, socialism, anarchism"]]],
+["Philosophy of Science","How science works and its limits","Popper's falsifiability, Kuhn's paradigm shifts"],
+["Philosophy of Language","Meaning, reference and truth","Frege, Wittgenstein"],
+["Philosophy of Religion","God, faith, evil and reason","Ontological argument, problem of evil, Pascal's wager"],
+["Major Eras","Where the ideas come from","",[
+ ["Ancient","Greek and Hellenistic thought","Socrates, Plato, Aristotle, Stoics"],
+ ["Medieval","Faith and reason","Augustine, Aquinas, Avicenna"],
+ ["Modern","Reason vs experience","Descartes, Hume, Kant"],
+ ["Contemporary","Existentialism, analytic, pragmatism","Sartre, Russell, James"],
+ ["Eastern","Traditions beyond the West","Confucius, Buddha, Vedanta, Daoism"]]]
+];
+function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e}
+function head(n){var f=document.createDocumentFragment();f.appendChild(el("div","n",n[0]));
+ if(n[1])f.appendChild(el("div","d",n[1]));
+ if(n[2])f.appendChild(el("div","x","Ex: "+n[2]));return f}
+function build(n){
+ if(n[3]){var d=el("details"),s=el("summary"),b=el("div");b.appendChild(head(n));s.appendChild(b);d.appendChild(s);
+  var k=el("div","kids");n[3].forEach(function(c){k.appendChild(build(c))});d.appendChild(k);return d}
+ var l=el("div","leaf");l.appendChild(head(n));return l}
+var root=document.getElementById("tree");
+D.forEach(function(n,i){var t=el("div","top");t.style.setProperty("--h",Math.round(i*360/D.length+215)%360);t.appendChild(build(n));root.appendChild(t)});
+function all(o){document.querySelectorAll("details").forEach(function(d){d.open=o})}
+document.getElementById("ea").onclick=function(){all(true)};
+document.getElementById("ca").onclick=function(){all(false)};
+</script>
+</body>
+</html>
